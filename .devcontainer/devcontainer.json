@@ -1,5 +1,5 @@
 {
-    "name": "rust_examples",
+    "name": "DBSE",
     "dockerComposeFile": "${localWorkspaceFolder}/docker-compose.yml",
     "service": "main",
     "workspaceFolder": "/home/vscode/DBSE",
