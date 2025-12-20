@@ -25,7 +25,8 @@
                 "tamasfe.even-better-toml",
                 "ms-azuretools.vscode-docker",
                 "ybaumes.highlight-trailing-white-spaces",
-                "probe-rs.probe-rs-debugger"
+                "probe-rs.probe-rs-debugger",
+                "Sensmetry.syside-editor"
             ]
         }
     }
