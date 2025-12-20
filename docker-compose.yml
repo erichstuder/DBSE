@@ -1,0 +1,14 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/home/vscode/DBSE
+      - /media/${USER}:/media/vscode
+      - /dev/bus/usb:/dev/bus/usb
+    working_dir: /home/vscode/DBSE
+    stdin_open: true
+    tty: true
+    privileged: true
+    stop_grace_period: 0s

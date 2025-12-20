@@ -1,0 +1,32 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "stm32f446re launch",
+            "type": "probe-rs-debug",
+            "request": "launch",
+            "preLaunchTask": "stm32f446re_example_build",
+            "cwd": "${workspaceFolder}",
+            "connectUnderReset": false,
+            "chip": "STM32F446RE",
+            "flashingConfig": {
+                "flashingEnabled": true,
+                "haltAfterReset": true,
+            },
+            "coreConfigs": [
+                {
+                    "coreIndex": 0,
+                    "programBinary": "stm32f446re_example/target/thumbv7em-none-eabihf/debug/stm32f446re_example",
+                    "rttEnabled": true,
+                    "rttChannelFormats": [
+                        {
+                            "channelNumber": 0,
+                            "dataFormat": "Defmt",
+                            "logFormat": "{t:blue} {L:5} {s:blue}\n  {{m} @ {F}:{l}%dimmed}"
+                        }
+                    ]
+                }
+            ],
+        }
+    ]
+}
