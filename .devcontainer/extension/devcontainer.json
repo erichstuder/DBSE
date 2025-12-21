@@ -7,7 +7,9 @@
         "vscode": {
             "extensions": [
                 "ms-azuretools.vscode-docker",
-                "ybaumes.highlight-trailing-white-spaces"
+                "ybaumes.highlight-trailing-white-spaces",
+                "dbaeumer.vscode-eslint",
+                "ms-vscode.extension-test-runner"
             ]
         }
     }
