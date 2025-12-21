@@ -4,7 +4,7 @@
         {
             "label": "stm32f446re_build",
             "type": "shell",
-            "command": "cd examples/stm32f446re && cargo build",
+            "command": "cd stm32f446re && cargo build",
             "group": {
                 "kind": "build",
                 "isDefault": true
