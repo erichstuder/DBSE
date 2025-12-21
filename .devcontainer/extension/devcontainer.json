@@ -1,0 +1,14 @@
+{
+    "name": "extension",
+    "dockerComposeFile": "${localWorkspaceFolder}/extension/docker-compose.yml",
+    "service": "main",
+    "workspaceFolder": "/home/vscode/DBSE",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ybaumes.highlight-trailing-white-spaces"
+            ]
+        }
+    }
+}
