@@ -6,7 +6,6 @@
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.shell.linux": "/bin/bash",
                 "rust-analyzer.check.allTargets": false,
                 "rust-analyzer.inlayHints.typeHints.enable": false,
                 "rust-analyzer.inlayHints.parameterHints.enable": false,
