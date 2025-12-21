@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - .:/home/vscode/DBSE
+      - ..:/home/vscode/DBSE
       - /media/${USER}:/media/vscode
       - /dev/bus/usb:/dev/bus/usb
     working_dir: /home/vscode/DBSE

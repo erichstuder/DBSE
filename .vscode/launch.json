@@ -5,7 +5,7 @@
             "name": "stm32f446re launch",
             "type": "probe-rs-debug",
             "request": "launch",
-            "preLaunchTask": "stm32f446re_example_build",
+            "preLaunchTask": "stm32f446re_build",
             "cwd": "${workspaceFolder}",
             "connectUnderReset": false,
             "chip": "STM32F446RE",
@@ -16,7 +16,7 @@
             "coreConfigs": [
                 {
                     "coreIndex": 0,
-                    "programBinary": "stm32f446re_example/target/thumbv7em-none-eabihf/debug/stm32f446re_example",
+                    "programBinary": "examples/stm32f446re/target/thumbv7em-none-eabihf/debug/stm32f446re",
                     "rttEnabled": true,
                     "rttChannelFormats": [
                         {

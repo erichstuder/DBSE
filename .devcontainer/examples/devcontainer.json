@@ -1,6 +1,6 @@
 {
-    "name": "DBSE",
-    "dockerComposeFile": "${localWorkspaceFolder}/docker-compose.yml",
+    "name": "examples",
+    "dockerComposeFile": "${localWorkspaceFolder}/examples/docker-compose.yml",
     "service": "main",
     "workspaceFolder": "/home/vscode/DBSE",
     "customizations": {

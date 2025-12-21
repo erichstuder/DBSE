@@ -7,7 +7,7 @@ RUN curl --proto '=https' --tlsv1.2 -LsSf https://github.com/probe-rs/probe-rs/r
 
 RUN rustup target add thumbv7em-none-eabihf
 
-WORKDIR /home/vscode/dependencies_fetch_project/dummy/stm32f446re_example
+WORKDIR /home/vscode/dependencies_fetch_project/dummy/stm32f446re
 RUN cargo init
-COPY ./stm32f446re_example/Cargo.toml .
+COPY ./stm32f446re/Cargo.toml .
 RUN cargo fetch

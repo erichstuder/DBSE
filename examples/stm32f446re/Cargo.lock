@@ -371,7 +371,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "stm32f446re_example"
+name = "stm32f446re"
 version = "0.0.0"
 dependencies = [
  "cortex-m",
