@@ -2,7 +2,7 @@
     "name": "extension",
     "dockerComposeFile": "${localWorkspaceFolder}/extension/docker-compose.yml",
     "service": "main",
-    "workspaceFolder": "/home/vscode/DBSE",
+    "workspaceFolder": "/home/vscode/DBSE/extension/sysmlv2-renderer",
     "customizations": {
         "vscode": {
             "extensions": [
