@@ -1,0 +1,14 @@
+{
+    "name": "parser",
+    "dockerComposeFile": "${localWorkspaceFolder}/parser/docker-compose.yml",
+    "service": "main",
+    "workspaceFolder": "/home/vscode/DBSE/parser/sysmlv2-parser",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-containers",
+                "ybaumes.highlight-trailing-white-spaces"
+            ]
+        }
+    }
+}
