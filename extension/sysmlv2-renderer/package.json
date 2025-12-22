@@ -14,10 +14,25 @@
   "contributes": {
     "commands": [
       {
-        "command": "sysmlv2-renderer.helloWorld",
-        "title": "Hello World"
+        "command": "sysmlv2-renderer.openPreview",
+        "title": "SysMLv2: Open Preview"
       }
-    ]
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "sysmlv2-renderer.openPreview",
+          "when": "resourceExtname == .sysml"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "sysmlv2-renderer.openPreview",
+          "when": "resourceExtname == .sysml",
+          "group": "navigation"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
