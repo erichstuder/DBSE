@@ -26,6 +26,6 @@ INTERACTIVE="$HOME/SysML-v2-Pilot-Implementation/org.omg.sysml.interactive/targe
 
 echo running the program...
 echo ""
-java -cp "build/classes/java/main:build/resources/main:$INTERACTIVE" Parser
+java -cp "build/classes/java/main:build/resources/main:$INTERACTIVE" Parser $HOME/DBSE/examples/stm32f446re/src/led_state_machine.sysml
 echo ""
 echo ...done

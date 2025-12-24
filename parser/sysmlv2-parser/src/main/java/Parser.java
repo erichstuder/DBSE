@@ -14,22 +14,28 @@ import org.omg.sysml.lang.sysml.Element;
 
 public class Parser {
     public static void main(String[] args) {
-        System.out.println("Hello, World! \n");
+        if (args.length < 1) {
+            System.out.println("Usage: java Parser <path-to-file.sysml>");
+            return;
+        }
+
+        String filePath = args[0];
+        StringBuilder sysmlContent = new StringBuilder();
+        try (java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(filePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sysmlContent.append(line).append("\n");
+            }
+        } catch (java.io.IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            return;
+        }
 
         SysMLInteractive sysml = SysMLInteractive.getInstance();
-        // SysMLInteractiveResult result = sysml.process(
-        //     // "package P {part definition PD {} part p is a PD {} }", true);
-        //     "package myRoot { \n" +
-        //             "part test {} \n" +
-        //             "}",
-        //     true);
-
+        sysml.loadLibrary("/home/vscode/SysML-v2-Pilot-Implementation/sysml.library/");
         sysml.next(".sysml");
         try {
-            sysml.parse(
-                "package myRoot {" +
-                    "part test {}" +
-                "}");
+            sysml.parse(sysmlContent.toString());
         } catch (Exception e) {
             sysml.removeResource();
             System.out.println(new SysMLInteractiveResult(e));
@@ -46,7 +52,12 @@ public class Parser {
         System.out.println("has error: " + result.hasErrors());
 
         System.out.println("resources: " + sysml.getInputResources().getFirst().getURI());
-        VizResult viz_result = sysml.viz(Collections.singletonList("myRoot"), Collections.emptyList(), Collections.emptyList(), Collections.emptyList());
-        System.out.println("\n\n\nsvg:\n " + viz_result.getSVG());
+        String first_element = sysml.getRootElement().getOwnedElement().getFirst().getName();
+        VizResult viz_result = sysml.viz(
+            Collections.singletonList(first_element),
+            Collections.emptyList(),
+            Collections.singletonList("STDCOLOR"),
+            Collections.emptyList());
+        System.out.println("\n\n\nsvg:\n" + viz_result.getSVG());
     }
 }
