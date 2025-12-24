@@ -2,7 +2,7 @@
     "name": "parser-java",
     "dockerComposeFile": "${localWorkspaceFolder}/parser/java/docker-compose.yml",
     "service": "main",
-    "workspaceFolder": "/home/vscode/DBSE/parser/java/parser",
+    "workspaceFolder": "/home/vscode/DBSE/parser/java",
     "customizations": {
         "vscode": {
             "extensions": [
