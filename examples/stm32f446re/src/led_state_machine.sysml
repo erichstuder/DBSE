@@ -1,10 +1,6 @@
 private import SI::s;
 private import ScalarValues::Boolean;
 
-part def Led {
-    attribute is_on: Boolean;
-}
-
 state LedStateMachine {
     in led : Led;
 
@@ -19,4 +15,8 @@ state LedStateMachine {
         entry assign led.is_on := true;
     }
     accept after 1.5 [s] then Off;
+}
+
+part def Led {
+    attribute is_on : Boolean;
 }
