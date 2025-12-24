@@ -1,8 +1,8 @@
 {
-    "name": "parser",
-    "dockerComposeFile": "${localWorkspaceFolder}/parser/docker-compose.yml",
+    "name": "parser-java",
+    "dockerComposeFile": "${localWorkspaceFolder}/parser/java/docker-compose.yml",
     "service": "main",
-    "workspaceFolder": "/home/vscode/DBSE/parser/sysmlv2-parser",
+    "workspaceFolder": "/home/vscode/DBSE/parser/java/parser",
     "customizations": {
         "vscode": {
             "extensions": [

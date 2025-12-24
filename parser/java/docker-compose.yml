@@ -4,8 +4,8 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - ..:/home/vscode/DBSE
-    working_dir: /home/vscode/DBSE/parser/sysmlv2-parser
+      - ../..:/home/vscode/DBSE
+    working_dir: /home/vscode/DBSE/parser/java/parser
     stdin_open: true
     tty: true
     stop_grace_period: 0s
