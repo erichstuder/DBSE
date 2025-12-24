@@ -1,7 +1,9 @@
 FROM mcr.microsoft.com/devcontainers/typescript-node:4.0.4-24-trixie
 
 RUN apt-get update && apt-get install -y \
+    tig \
     openjdk-21-jdk
+
 ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
 
 WORKDIR /home/vscode/
