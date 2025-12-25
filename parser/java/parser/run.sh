@@ -29,3 +29,9 @@ echo ""
 java -cp "build/classes/java/main:build/resources/main:$INTERACTIVE" Parser $HOME/DBSE/examples/stm32f446re/src/led_state_machine.sysml
 echo ""
 echo ...done
+
+echo running interactive parser...
+echo ""
+java -cp "build/classes/java/main:build/resources/main:$INTERACTIVE" InteractiveParser
+echo ""
+echo ...done
