@@ -12,8 +12,7 @@ public class InteractiveParser {
         SysMLInteractive sysml = SysMLInteractive.getInstance();
         sysml.loadLibrary("/home/vscode/SysML-v2-Pilot-Implementation/sysml.library/");
 
-        Scanner in = new Scanner(System.in);
-        try {
+        try(Scanner in = new Scanner(System.in)) {
             while(true) {
                 System.out.print("> ");
                 String input = in.nextLine().trim();
@@ -44,11 +43,6 @@ public class InteractiveParser {
                         Collections.singletonList("STDCOLOR"),
                         Collections.emptyList());
                 System.out.println("\n\n\nsvg:\n" + viz_result.getSVG());
-            }
-        }
-        finally {
-            if (in != null) {
-                in.close();
             }
         }
     }
