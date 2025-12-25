@@ -5,7 +5,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ..:/home/vscode/DBSE
-    working_dir: /home/vscode/DBSE/extension/sysmlv2-renderer
+    working_dir: /home/vscode/DBSE/extension
     stdin_open: true
     tty: true
     stop_grace_period: 0s
