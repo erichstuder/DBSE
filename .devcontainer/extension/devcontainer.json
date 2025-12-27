@@ -9,7 +9,9 @@
                 "ms-azuretools.vscode-docker",
                 "ybaumes.highlight-trailing-white-spaces",
                 "dbaeumer.vscode-eslint",
-                "ms-vscode.extension-test-runner"
+                "ms-vscode.extension-test-runner",
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-gradle"
             ]
         }
     }
