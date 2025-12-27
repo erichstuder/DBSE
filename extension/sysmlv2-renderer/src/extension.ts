@@ -17,14 +17,20 @@ export function activate(context: vscode.ExtensionContext) {
             {}
         );
 
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            // Get the file content as a single line (no newlines)
-            const content = editor.document.getText().replace(/\r?\n/g, ' ');
+        let currentDocument: vscode.TextDocument | undefined = vscode.window.activeTextEditor?.document;
+
+        async function updateSVG(document: vscode.TextDocument) {
+            // Only update if the document is the one being previewed
+            if (!panel.visible || document !== currentDocument) return;
+            const content = document.getText().replace(/\r?\n/g, ' ');
             const PARSER_PATH = "/home/vscode/DBSE/extension/parser/build/classes/java/main";
             const INTERACTIVE = "/SysML-v2-Pilot-Implementation/org.omg.sysml.interactive/target/org.omg.sysml.interactive-0.55.0-SNAPSHOT-all.jar";
             const env = { ...process.env, LANG: 'en_US.UTF-8', LC_ALL: 'en_US.UTF-8' };
-            const child = spawn('java', ['-cp', `${PARSER_PATH}:${INTERACTIVE}`, 'InteractiveParser'], { env });
+            const child = spawn('java', [
+                "-Dlog4j.configuration=file:/home/vscode/DBSE/extension/sysmlv2-renderer/log4j.properties",
+                '-cp', `${PARSER_PATH}:${INTERACTIVE}`,
+                'InteractiveParser'
+            ], { env });
 
             let svgStarted = false;
             let svgOutput = '';
@@ -54,7 +60,6 @@ export function activate(context: vscode.ExtensionContext) {
                 if (svgStarted && leftover) {
                     svgOutput += leftover + '\n';
                 }
-                console.log(svgOutput);
                 panel.webview.html = `
                     <html>
                     <body>
@@ -66,11 +71,35 @@ export function activate(context: vscode.ExtensionContext) {
 
             child.stdin.write(content);
             child.stdin.end();
+        }
+
+        // Initial render
+        if (currentDocument) {
+            updateSVG(currentDocument);
         } else {
             vscode.window.showErrorMessage('No active editor with a file to preview.');
         }
 
-        // No escaping needed for SVG output
+        // Listen for changes in the document
+        const changeDocDisposable = vscode.workspace.onDidChangeTextDocument(e => {
+            if (currentDocument && e.document === currentDocument) {
+                updateSVG(e.document);
+            }
+        });
+
+        // Listen for switching active editor
+        const changeEditorDisposable = vscode.window.onDidChangeActiveTextEditor(editor => {
+            if (editor && editor.document !== currentDocument) {
+                currentDocument = editor.document;
+                updateSVG(currentDocument);
+            }
+        });
+
+        // Clean up listeners when panel is closed
+        panel.onDidDispose(() => {
+            changeDocDisposable.dispose();
+            changeEditorDisposable.dispose();
+        });
     });
 
     context.subscriptions.push(disposable);
