@@ -24,10 +24,10 @@ public class InteractiveParser {
                     sysml.removeResource();
                     System.out.println(new SysMLInteractiveResult(e));
                 }
-                Element rootElement = sysml.getRootElement();
-                SysMLInteractiveResult result = new SysMLInteractiveResult(rootElement, Collections.emptyList());
                 sysml.addResourceToIndex(sysml.getResource());
 
+                Element rootElement = sysml.getRootElement();
+                SysMLInteractiveResult result = new SysMLInteractiveResult(rootElement, Collections.emptyList());
                 System.out.println("syntax: " + result.getSyntaxErrors());
                 System.out.println("semantic: " + result.getSemanticErrors());
                 System.out.println("exception: " + result.getException());
@@ -43,6 +43,7 @@ public class InteractiveParser {
                         Collections.singletonList("STDCOLOR"),
                         Collections.emptyList());
                 System.out.println("\n\n\nsvg:\n" + viz_result.getSVG());
+                System.out.flush();
             }
         }
     }
