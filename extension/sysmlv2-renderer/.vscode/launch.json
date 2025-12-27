@@ -13,7 +13,6 @@
 				"--extensionDevelopmentPath=${workspaceFolder}",
 				"${workspaceFolder}/../../examples/stm32f446re/src/",
 				"${workspaceFolder}/../../examples/stm32f446re/src/led_state_machine.sysml",
-				"--disable-extensions"
 			],
 			"outFiles": [
 				"${workspaceFolder}/out/**/*.js"
