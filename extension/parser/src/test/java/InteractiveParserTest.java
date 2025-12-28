@@ -4,6 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class InteractiveParserTest {
 	@Test
 	void simpleSanityTest() {
-		assertTrue(false, "Sanity check: true is true");
+		assertTrue(true, "Sanity check: true is true");
 	}
 }
