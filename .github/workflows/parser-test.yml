@@ -1,0 +1,13 @@
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+    schedule:
+        - cron: '0 8 * * 5' # Run at 08:00 UTC every Friday
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v6
