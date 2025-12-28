@@ -10,6 +10,11 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - uses: actions/checkout@v6
+        -   name: setup
+            run: |
+                sudo apt-get update
+                sudo apt-get install -y docker-compose
 
-            - run: ./run.py --extension --test
+        -   uses: actions/checkout@v6
+
+        -   run: ./run.py --extension --test --verbose
