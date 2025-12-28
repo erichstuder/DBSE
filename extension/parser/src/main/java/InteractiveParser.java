@@ -1,4 +1,3 @@
-
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -12,6 +11,7 @@ public class InteractiveParser {
         SysMLInteractive sysml = SysMLInteractive.getInstance();
         sysml.loadLibrary("/SysML-v2-Pilot-Implementation/sysml.library/");
 
+        System.out.println("Startup complete.");
         try(Scanner in = new Scanner(System.in)) {
             while(true) {
                 System.out.print("> ");
