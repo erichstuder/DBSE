@@ -11,11 +11,11 @@
 			"request": "launch",
 			"args": [
 				"--extensionDevelopmentPath=${workspaceFolder}",
-				"${workspaceFolder}/../../examples/stm32f446re/src/",
-				"${workspaceFolder}/../../examples/stm32f446re/src/led_state_machine.sysml",
+				"${workspaceFolder}/../examples/stm32f446re/src/",
+				"${workspaceFolder}/../examples/stm32f446re/src/led_state_machine.sysml",
 			],
 			"outFiles": [
-				"${workspaceFolder}/out/**/*.js"
+				"${workspaceFolder}/sysmlv2-renderer/out/**/*.js"
 			],
 			"preLaunchTask": "${defaultBuildTask}"
 		}
