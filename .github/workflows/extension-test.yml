@@ -13,10 +13,12 @@ jobs:
         -   name: setup
             run: |
                 sudo apt-get update
-                sudo apt-get install -y docker-compose
+                sudo apt-get install -y docker-compose xvfb
 
         -   uses: actions/checkout@v6
 
         -   run: |
+                Xvfb :99 &
+                export DISPLAY=:99
                 ./run.py --extension --init --verbose --pseudo_tty_off
                 ./run.py --extension --test --verbose --pseudo_tty_off
