@@ -25,14 +25,18 @@ if __name__ == "__main__":
 
     if ex.arguments.init:
         commands = (
+            'Xvfb :99 & export DISPLAY=:99 && '
             './parser/build.sh && '
             'npm install --prefix ./sysmlv2-renderer && '
             'cd sysmlv2-renderer && npx vscode-test --download-only'
         )
     elif ex.arguments.test:
         commands = (
-            './parser/run-tests.sh && '
-            'npm test --prefix ./sysmlv2-renderer'
+            'Xvfb :99 & export DISPLAY=:99 && '
+            'echo "" && echo "*** Running extension tests..." && '
+            'npm test --prefix ./sysmlv2-renderer && '
+            'echo "" && echo "*** Running parser tests..." && '
+            './parser/run-tests.sh'
         )
     else:
         commands = None
