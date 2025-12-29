@@ -9,6 +9,7 @@
 	// Turn off tsc task auto detection since we have the necessary tasks as npm scripts
 	"typescript.tsc.autoDetect": "off",
 
+	"java.compile.nullAnalysis.mode": "automatic",
 	"java.project.sourcePaths": [
 		"parser/src/main/java",
 		"parser/src/test/java"
@@ -16,5 +17,5 @@
 
 	"python.analysis.extraPaths": [
 		"../project_management"
-	],
+	]
 }
