@@ -64,14 +64,18 @@ export function activate(context: vscode.ExtensionContext) {
         });
 
         async function send_to_parser(document: vscode.TextDocument) {
-            if (document !== currentDocument) return;
+            if (document !== currentDocument) {
+                return;
+            }
 
             const textWithoutNewlines = document ? document.getText().replace(/\n/g, '') : '';
             child.stdin.write(textWithoutNewlines + '\n');
         }
 
         async function update_svg(document: vscode.TextDocument) {
-            if (!panel.visible || document !== currentDocument) return;
+            if (!panel.visible || document !== currentDocument) {
+                return;
+            }
 
             panel.webview.html = `
                 <html>
