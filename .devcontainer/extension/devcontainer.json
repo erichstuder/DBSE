@@ -11,7 +11,8 @@
                 "dbaeumer.vscode-eslint",
                 "ms-vscode.extension-test-runner",
                 "vscjava.vscode-java-pack",
-                "vscjava.vscode-gradle"
+                "vscjava.vscode-gradle",
+                "ms-python.python"
             ]
         }
     }
