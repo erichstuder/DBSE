@@ -24,9 +24,16 @@ if __name__ == "__main__":
     ex = Executor(additional_arguments, description='Execute feature tests')
 
     if ex.arguments.init:
-        commands = './parser/build.sh && npm install --prefix ./sysmlv2-renderer'
+        commands = (
+            './parser/build.sh && '
+            'npm install --prefix ./sysmlv2-renderer && '
+            'cd sysmlv2-renderer && npx vscode-test --download-only'
+        )
     elif ex.arguments.test:
-        commands = 'cd parser && ./run-tests.sh'
+        commands = (
+            './parser/run-tests.sh && '
+            'npm test --prefix ./sysmlv2-renderer'
+        )
     else:
         commands = None
 
