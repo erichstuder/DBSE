@@ -1,12 +1,11 @@
 {
-    "name": "DBSE",
-    "dockerComposeFile": "${localWorkspaceFolder}/docker-compose.yml",
+    "name": "examples",
+    "dockerComposeFile": "${localWorkspaceFolder}/examples/docker-compose.yml",
     "service": "main",
-    "workspaceFolder": "/home/vscode/DBSE",
+    "workspaceFolder": "/home/vscode/DBSE/examples",
     "customizations": {
         "vscode": {
             "settings": {
-                "terminal.integrated.shell.linux": "/bin/bash",
                 "rust-analyzer.check.allTargets": false,
                 "rust-analyzer.inlayHints.typeHints.enable": false,
                 "rust-analyzer.inlayHints.parameterHints.enable": false,

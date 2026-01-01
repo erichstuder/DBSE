@@ -1,0 +1,22 @@
+on:
+    push:
+    pull_request:
+    workflow_dispatch:
+    schedule:
+        - cron: '0 8 * * 5' # Run at 08:00 UTC every Friday
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        steps:
+        -   name: setup
+            run: |
+                sudo apt-get update
+                sudo apt-get install -y docker-compose
+
+        -   uses: actions/checkout@v6
+
+        -   run: |
+                ./run.py --extension --init --verbose --pseudo_tty_off
+                ./run.py --extension --test --verbose --pseudo_tty_off
