@@ -1,0 +1,17 @@
+{
+    "name": "code_generator",
+    "dockerComposeFile": "${localWorkspaceFolder}/code_generator/docker-compose.yml",
+    "service": "main",
+    "workspaceFolder": "/home/vscode/DBSE/code_generator",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-azuretools.vscode-docker",
+                "ybaumes.highlight-trailing-white-spaces",
+                "vscjava.vscode-java-pack",
+                "vscjava.vscode-gradle",
+                "ms-python.python"
+            ]
+        }
+    }
+}

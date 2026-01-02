@@ -1,0 +1,11 @@
+{
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.project.sourcePaths": [
+        "parser/src/main/java",
+        "parser/src/test/java"
+    ],
+
+    "python.analysis.extraPaths": [
+        "../project_management"
+    ]
+}
