@@ -18,5 +18,4 @@ jobs:
         -   uses: actions/checkout@v6
 
         -   run: |
-                ./run.py --code_generator --init --verbose --pseudo_tty_off
                 ./run.py --code_generator --test --verbose --pseudo_tty_off
