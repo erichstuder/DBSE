@@ -1,4 +1,5 @@
 {
+    "java.import.gradle.java.home": "/usr/lib/jvm/msopenjdk-current",
     "java.compile.nullAnalysis.mode": "automatic",
     "java.project.sourcePaths": [
         "parser/src/main/java",
