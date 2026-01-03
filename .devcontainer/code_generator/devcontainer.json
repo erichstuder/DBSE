@@ -10,7 +10,8 @@
                 "ybaumes.highlight-trailing-white-spaces",
                 "vscjava.vscode-java-pack",
                 "vscjava.vscode-gradle",
-                "ms-python.python"
+                "ms-python.python",
+                "dcortes92.FreeMarker"
             ]
         }
     }
