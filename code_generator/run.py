@@ -10,6 +10,11 @@ from executor import Executor # type: ignore
 if __name__ == "__main__":
     additional_arguments = [
         {
+            'flag': '-b',
+            'name': '--build',
+            'help': 'Build the project.'
+        },
+        {
             'flag': '-t',
             'name': '--test',
             'help': 'Run tests.'
@@ -18,7 +23,11 @@ if __name__ == "__main__":
 
     ex = Executor(additional_arguments, description='Execute feature tests')
 
-    if ex.arguments.test:
+    if ex.arguments.build:
+        commands = (
+            'gradle build'
+        )
+    elif ex.arguments.test:
         commands = (
             './run-tests.sh'
         )
