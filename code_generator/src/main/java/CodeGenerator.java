@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URISyntaxException;
 import java.util.Properties;
 import java.io.IOException;
 
@@ -129,7 +131,16 @@ public class CodeGenerator {
         // }
     }
 
-    public static void main(String[] args) {
+    public static Properties getConfig(String configPath) throws IOException, URISyntaxException {
+        Properties config = new Properties();
+        String jarDir = new File(CodeGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
+        File configFile = new File(jarDir, configPath);
+        InputStream in = new FileInputStream(configFile);
+        config.load(in);
+        return config;
+    }
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
         String configPath = "code-gen.properties";
         if (args.length > 0) {
             String arg = args[0];
@@ -152,19 +163,7 @@ public class CodeGenerator {
             }
         }
 
-        Properties config = new Properties();
-        try (InputStream in = CodeGenerator.class.getClassLoader().getResourceAsStream(configPath)) {
-            if (in == null) {
-                System.err.println("Error: Config file '" + configPath + "' not found in classpath.");
-                System.exit(1);
-            }
-            config.load(in);
-        }
-        catch (IOException e) {
-            System.err.println("Error loading config file: " + e.getMessage());
-            System.exit(1);
-        }
-
+        Properties config = getConfig(configPath);
         new CodeGenerator(config).run();
     }
 }
