@@ -5,6 +5,7 @@
         "parser/src/main/java",
         "parser/src/test/java"
     ],
+    "java.inlayHints.parameterNames.enabled": "none",
 
     "python.analysis.extraPaths": [
         "../project_management"
