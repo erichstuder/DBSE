@@ -10,6 +10,8 @@ dependencies {
     implementation files('/SysML-v2-Pilot-Implementation/org.omg.sysml.interactive/target/org.omg.sysml.interactive-0.55.0-SNAPSHOT-all.jar')
     implementation files('/SysML-v2-Pilot-Implementation/org.omg.sysml.interactive/target/org.omg.sysml.interactive-0.55.0-SNAPSHOT-sources.jar')
 
+    implementation 'org.freemarker:freemarker:2.3.34'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:6.0.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:6.0.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:6.0.1'
