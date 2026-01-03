@@ -5,8 +5,11 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.File;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.Properties;
+import java.io.IOException;
 
 import org.omg.sysml.interactive.SysMLInteractive;
 import org.omg.sysml.interactive.SysMLInteractiveResult;
@@ -17,6 +20,7 @@ import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Template;
 
 public class CodeGenerator {
+    private Properties config;
     private SysMLInteractive sysml;
 
     public class Enum {
@@ -40,12 +44,19 @@ public class CodeGenerator {
         }
     }
 
-    public CodeGenerator() throws Exception {
+    public CodeGenerator(Properties config) {
+        this.config = config;
+
+
         sysml = SysMLInteractive.getInstance();
         sysml.loadLibrary("/SysML-v2-Pilot-Implementation/sysml.library/");
 
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
-        cfg.setDirectoryForTemplateLoading(new File("src/test/resources/templates"));
+        try {
+            cfg.setDirectoryForTemplateLoading(new File(config.getProperty("template.path")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
         cfg.setLogTemplateExceptions(false);
@@ -73,51 +84,87 @@ public class CodeGenerator {
         enums.add(enum2);
         root.put("enums", enums);
 
-        Template temp = cfg.getTemplate("main.ftl");
-        System.out.println(temp);
-
-        System.out.println("Result:\n");
-        Writer out = new OutputStreamWriter(System.out);
-        temp.process(root, out);
-    }
-
-    public void run() {
-        try(Scanner in = new Scanner(System.in)) {
-            while(true) {
-                System.out.print("> ");
-                String input = in.nextLine().trim();
-
-                sysml.next(".sysml");
-                try {
-                    sysml.parse(input);
-                } catch (Exception e) {
-                    sysml.removeResource();
-                    System.out.println(new SysMLInteractiveResult(e));
-                }
-                sysml.addResourceToIndex(sysml.getResource());
-
-                // Element rootElement = sysml.getRootElement();
-                // SysMLInteractiveResult result = new SysMLInteractiveResult(rootElement, Collections.emptyList());
-                // System.out.println("syntax: " + result.getSyntaxErrors());
-                // System.out.println("semantic: " + result.getSemanticErrors());
-                // System.out.println("exception: " + result.getException());
-                // System.out.println("format root element: " + result.formatRootElement());
-                // System.out.println("qualified name: " + result.getRootElement().getName());
-                // System.out.println("has error: " + result.hasErrors());
-
-                // System.out.println("resources: " + sysml.getInputResources().getFirst().getURI());
-                String first_element = sysml.getRootElement().getOwnedElement().getFirst().getName();
-                System.out.println("first element: " + first_element);
-                System.out.flush();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
         try {
-            CodeGenerator cg = new CodeGenerator();
+            Template temp = cfg.getTemplate(config.getProperty("template.file"));
+            System.out.println(temp);
+            System.out.println("Result:\n");
+            Writer out = new OutputStreamWriter(System.out);
+            temp.process(root, out);
+        } catch (IOException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void run() {
+        // try(Scanner in = new Scanner(System.in)) {
+        //     while(true) {
+        //         System.out.print("> ");
+        //         String input = in.nextLine().trim();
+
+        //         sysml.next(".sysml");
+        //         try {
+        //             sysml.parse(input);
+        //         } catch (Exception e) {
+        //             sysml.removeResource();
+        //             System.out.println(new SysMLInteractiveResult(e));
+        //         }
+        //         sysml.addResourceToIndex(sysml.getResource());
+
+        //         // Element rootElement = sysml.getRootElement();
+        //         // SysMLInteractiveResult result = new SysMLInteractiveResult(rootElement, Collections.emptyList());
+        //         // System.out.println("syntax: " + result.getSyntaxErrors());
+        //         // System.out.println("semantic: " + result.getSemanticErrors());
+        //         // System.out.println("exception: " + result.getException());
+        //         // System.out.println("format root element: " + result.formatRootElement());
+        //         // System.out.println("qualified name: " + result.getRootElement().getName());
+        //         // System.out.println("has error: " + result.hasErrors());
+
+        //         // System.out.println("resources: " + sysml.getInputResources().getFirst().getURI());
+        //         String first_element = sysml.getRootElement().getOwnedElement().getFirst().getName();
+        //         System.out.println("first element: " + first_element);
+        //         System.out.flush();
+        //     }
+        // }
+    }
+
+    public static void main(String[] args) {
+        String configPath = "code-gen.properties";
+        if (args.length > 0) {
+            String arg = args[0];
+            if (arg.equals("--help") || arg.equals("-h")) {
+                System.out.println("Usage: java -jar CodeGenerator.jar [--config-file <path>] [--help]");
+                System.exit(0);
+            }
+            else if (arg.equals("--config-file")) {
+                if (args.length > 1) {
+                    configPath = args[1];
+                }
+                else {
+                    System.err.println("Error: --config-file requires a file path.");
+                    System.exit(1);
+                }
+            }
+            else {
+                System.err.println("Error: Unknown argument '" + arg + "'. Use --help for usage information.");
+                System.exit(1);
+            }
+        }
+
+        Properties config = new Properties();
+        try (InputStream in = CodeGenerator.class.getClassLoader().getResourceAsStream(configPath)) {
+            if (in == null) {
+                System.err.println("Error: Config file '" + configPath + "' not found in classpath.");
+                System.exit(1);
+            }
+            config.load(in);
+        }
+        catch (IOException e) {
+            System.err.println("Error loading config file: " + e.getMessage());
+            System.exit(1);
+        }
+
+        new CodeGenerator(config).run();
     }
 }
