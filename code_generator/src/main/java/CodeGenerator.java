@@ -22,7 +22,6 @@ import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Template;
 
 public class CodeGenerator {
-    private Properties config;
     private SysMLInteractive sysml;
 
     public class Enum {
@@ -46,60 +45,57 @@ public class CodeGenerator {
         }
     }
 
-    public CodeGenerator(Properties config) {
-        this.config = config;
-
-
+    public CodeGenerator() {
         sysml = SysMLInteractive.getInstance();
         sysml.loadLibrary("/SysML-v2-Pilot-Implementation/sysml.library/");
 
-        Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
-        try {
-            cfg.setDirectoryForTemplateLoading(new File(config.getProperty("template.path")));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        cfg.setDefaultEncoding("UTF-8");
-        cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        cfg.setLogTemplateExceptions(false);
-        cfg.setWrapUncheckedExceptions(true);
-        cfg.setFallbackOnNullLoopVariable(false);
-        // cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault()); // notwendig? vorangehende auch alle notwendig?
+        // Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
+        // try {
+        //     cfg.setDirectoryForTemplateLoading(new File(config.getProperty("template.path")));
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // }
+        // cfg.setDefaultEncoding("UTF-8");
+        // cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        // cfg.setLogTemplateExceptions(false);
+        // cfg.setWrapUncheckedExceptions(true);
+        // cfg.setFallbackOnNullLoopVariable(false);
+        // // cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault()); // notwendig? vorangehende auch alle notwendig?
 
-        // simple data model
+        // // simple data model
 
-        Map<String, Object> root = new HashMap<>();
-        List<Enum> enums = new ArrayList<>();
-        Enum enum1 = new Enum();
-        HashMap<String, String> members1 = new HashMap<>();
-        members1.put("On", "");
-        members1.put("Off", "");
-        enum1.setName("enum1");
-        enum1.setMembers(members1);
-        Enum enum2 = new Enum();
-        HashMap<String, String> members2 = new HashMap<>();
-        members2.put("Red", "");
-        members2.put("Green", "");
-        enum2.setName("enum2");
-        enum2.setMembers(members2);
-        enums.add(enum1);
-        enums.add(enum2);
-        root.put("enums", enums);
+        // Map<String, Object> root = new HashMap<>();
+        // List<Enum> enums = new ArrayList<>();
+        // Enum enum1 = new Enum();
+        // HashMap<String, String> members1 = new HashMap<>();
+        // members1.put("On", "");
+        // members1.put("Off", "");
+        // enum1.setName("enum1");
+        // enum1.setMembers(members1);
+        // Enum enum2 = new Enum();
+        // HashMap<String, String> members2 = new HashMap<>();
+        // members2.put("Red", "");
+        // members2.put("Green", "");
+        // enum2.setName("enum2");
+        // enum2.setMembers(members2);
+        // enums.add(enum1);
+        // enums.add(enum2);
+        // root.put("enums", enums);
 
-        try {
-            Template temp = cfg.getTemplate(config.getProperty("template.file"));
-            System.out.println(temp);
-            System.out.println("Result:\n");
-            Writer out = new OutputStreamWriter(System.out);
-            temp.process(root, out);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        // try {
+        //     Template temp = cfg.getTemplate(config.getProperty("template.file"));
+        //     System.out.println(temp);
+        //     System.out.println("Result:\n");
+        //     Writer out = new OutputStreamWriter(System.out);
+        //     temp.process(root, out);
+        // } catch (IOException e) {
+        //     e.printStackTrace();
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
     }
 
-    public void run() {
+    public void run(Properties config) {
         // try(Scanner in = new Scanner(System.in)) {
         //     while(true) {
         //         System.out.print("> ");
@@ -164,6 +160,6 @@ public class CodeGenerator {
         }
 
         Properties config = getConfig(configPath);
-        new CodeGenerator(config).run();
+        new CodeGenerator().run(config);
     }
 }

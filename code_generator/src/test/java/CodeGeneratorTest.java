@@ -37,4 +37,13 @@ public class CodeGeneratorTest {
             assertNotNull(p, "Expected non-null for valid config path");
         }
     }
+
+    @Nested
+    class RunTests {
+        @Test
+        void run_null_config() {
+            CodeGenerator cg = new CodeGenerator();
+            cg.run(null);
+        }
+    }
 }
