@@ -51,7 +51,7 @@ public class CodeGenerator {
 
         // Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
         // try {
-        //     cfg.setDirectoryForTemplateLoading(new File(config.getProperty("template.path")));
+        //     cfg.setDirectoryForTemplateLoading(new File(properties.getProperty("template.path")));
         // } catch (IOException e) {
         //     e.printStackTrace();
         // }
@@ -83,7 +83,7 @@ public class CodeGenerator {
         // root.put("enums", enums);
 
         // try {
-        //     Template temp = cfg.getTemplate(config.getProperty("template.file"));
+        //     Template temp = cfg.getTemplate(properties.getProperty("template.file"));
         //     System.out.println(temp);
         //     System.out.println("Result:\n");
         //     Writer out = new OutputStreamWriter(System.out);
@@ -95,7 +95,7 @@ public class CodeGenerator {
         // }
     }
 
-    public void run(Properties config) {
+    public void run(Properties properties) {
         // try(Scanner in = new Scanner(System.in)) {
         //     while(true) {
         //         System.out.print("> ");
@@ -127,29 +127,29 @@ public class CodeGenerator {
         // }
     }
 
-    public static Properties getConfig(String configPath) throws IOException, URISyntaxException {
-        Properties config = new Properties();
+    public static Properties getProperties(String propertiesPath) throws IOException, URISyntaxException {
+        Properties properties = new Properties();
         String jarDir = new File(CodeGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
-        File configFile = new File(jarDir, configPath);
-        InputStream in = new FileInputStream(configFile);
-        config.load(in);
-        return config;
+        File propertiesFile = new File(jarDir, propertiesPath);
+        InputStream in = new FileInputStream(propertiesFile);
+        properties.load(in);
+        return properties;
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        String configPath = "code-gen.properties";
+        String propertiesPath = "code-gen.properties";
         if (args.length > 0) {
             String arg = args[0];
             if (arg.equals("--help") || arg.equals("-h")) {
-                System.out.println("Usage: java -jar CodeGenerator.jar [--config-file <path>] [--help]");
+                System.out.println("Usage: java -jar CodeGenerator.jar [--properties-file <path>] [--help]");
                 System.exit(0);
             }
-            else if (arg.equals("--config-file")) {
+            else if (arg.equals("--properties-file")) {
                 if (args.length > 1) {
-                    configPath = args[1];
+                    propertiesPath = args[1];
                 }
                 else {
-                    System.err.println("Error: --config-file requires a file path.");
+                    System.err.println("Error: --properties-file requires a file path.");
                     System.exit(1);
                 }
             }
@@ -159,7 +159,7 @@ public class CodeGenerator {
             }
         }
 
-        Properties config = getConfig(configPath);
-        new CodeGenerator().run(config);
+        Properties properties = getProperties(propertiesPath);
+        new CodeGenerator().run(properties);
     }
 }

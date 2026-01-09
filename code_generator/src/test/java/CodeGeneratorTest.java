@@ -13,27 +13,27 @@ public class CodeGeneratorTest {
         @Test
         void getConfig_null() throws Exception {
             assertThrows(NullPointerException.class, () -> {
-                CodeGenerator.getConfig(null);
+                CodeGenerator.getProperties(null);
             });
         }
 
         @Test
         void getConfig_invalidPath() throws Exception {
             assertThrows(FileNotFoundException.class, () -> {
-                CodeGenerator.getConfig("123");
+                CodeGenerator.getProperties("123");
             });
         }
 
         @Test
         void getConfig_emptyPath() throws Exception {
             assertThrows(FileNotFoundException.class, () -> {
-                CodeGenerator.getConfig("");
+                CodeGenerator.getProperties("");
             });
         }
 
         @Test
         void getConfig() throws Exception {
-            Properties p = CodeGenerator.getConfig("../../resources/test/code-gen.properties");
+            Properties p = CodeGenerator.getProperties("../../resources/test/code-gen.properties");
             assertNotNull(p, "Expected non-null for valid config path");
         }
     }
