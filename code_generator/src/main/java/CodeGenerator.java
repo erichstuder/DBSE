@@ -4,13 +4,10 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.URISyntaxException;
-import java.util.Properties;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.omg.sysml.interactive.SysMLInteractive;
@@ -48,10 +45,12 @@ public class CodeGenerator {
     public CodeGenerator() {
         sysml = SysMLInteractive.getInstance();
         sysml.loadLibrary("/SysML-v2-Pilot-Implementation/sysml.library/");
+    }
 
+    public void run(CodeGenConfig config) {
         // Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
         // try {
-        //     cfg.setDirectoryForTemplateLoading(new File(properties.getProperty("template.path")));
+        //     cfg.setDirectoryForTemplateLoading(new File(config.getProperty("template.path")));
         // } catch (IOException e) {
         //     e.printStackTrace();
         // }
@@ -60,7 +59,8 @@ public class CodeGenerator {
         // cfg.setLogTemplateExceptions(false);
         // cfg.setWrapUncheckedExceptions(true);
         // cfg.setFallbackOnNullLoopVariable(false);
-        // // cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault()); // notwendig? vorangehende auch alle notwendig?
+        // // cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault()); // notwendig?
+        // vorangehende auch alle notwendig?
 
         // // simple data model
 
@@ -83,19 +83,18 @@ public class CodeGenerator {
         // root.put("enums", enums);
 
         // try {
-        //     Template temp = cfg.getTemplate(properties.getProperty("template.file"));
-        //     System.out.println(temp);
-        //     System.out.println("Result:\n");
-        //     Writer out = new OutputStreamWriter(System.out);
-        //     temp.process(root, out);
+        // Template temp = cfg.getTemplate(properties.getProperty("template.file"));
+        // System.out.println(temp);
+        // System.out.println("Result:\n");
+        // Writer out = new OutputStreamWriter(System.out);
+        // temp.process(root, out);
         // } catch (IOException e) {
-        //     e.printStackTrace();
+        // e.printStackTrace();
         // } catch (Exception e) {
-        //     e.printStackTrace();
+        // e.printStackTrace();
         // }
-    }
 
-    public void run(Properties properties) {
+
         // try(Scanner in = new Scanner(System.in)) {
         //     while(true) {
         //         System.out.print("> ");
@@ -127,29 +126,20 @@ public class CodeGenerator {
         // }
     }
 
-    public static Properties getProperties(String propertiesPath) throws IOException, URISyntaxException {
-        Properties properties = new Properties();
-        String jarDir = new File(CodeGenerator.class.getProtectionDomain().getCodeSource().getLocation().toURI()).getParent();
-        File propertiesFile = new File(jarDir, propertiesPath);
-        InputStream in = new FileInputStream(propertiesFile);
-        properties.load(in);
-        return properties;
-    }
-
-    public static void main(String[] args) throws IOException, URISyntaxException {
-        String propertiesPath = "code-gen.properties";
+    public static void main(String[] args) throws URISyntaxException, FileNotFoundException, IOException {
+        String codeGenConfigPath = "code-gen.config";
         if (args.length > 0) {
             String arg = args[0];
             if (arg.equals("--help") || arg.equals("-h")) {
-                System.out.println("Usage: java -jar CodeGenerator.jar [--properties-file <path>] [--help]");
+                System.out.println("Usage: java -jar CodeGenerator.jar [--config-file <path>] [--help]");
                 System.exit(0);
             }
-            else if (arg.equals("--properties-file")) {
+            else if (arg.equals("--config-file")) {
                 if (args.length > 1) {
-                    propertiesPath = args[1];
+                    codeGenConfigPath = args[1];
                 }
                 else {
-                    System.err.println("Error: --properties-file requires a file path.");
+                    System.err.println("Error: --config-file requires a file path.");
                     System.exit(1);
                 }
             }
@@ -159,7 +149,7 @@ public class CodeGenerator {
             }
         }
 
-        Properties properties = getProperties(propertiesPath);
-        new CodeGenerator().run(properties);
+        CodeGenConfig codeGenConfig = new CodeGenConfig(codeGenConfigPath);
+        new CodeGenerator().run(codeGenConfig);
     }
 }
