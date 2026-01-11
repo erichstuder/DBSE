@@ -12,20 +12,23 @@ package LedControl {
         Error;
     }
 
-//     // action set_led { in value : LedState; }
+    action set_led {
+        in value : LedState;
+        out dummy: MyType;
+    }
 
-//     // state LedStateMachine {
-//     //     entry;
-//     //     then Off;
+    state LedStateMachine {
+        entry;
+        then Off;
 
-//     //     state Off {
-//     //         entry set_led { in value = LedState::Off; }
-//     //     }
-//     //     accept after 0.5 [s] then On;
+        state Off {
+            entry set_led { in value = LedState::Off; }
+        }
+        accept after 0.5 [s] then On;
 
-//     //     state On {
-//     //         entry set_led { in value = LedState::On; }
-//     //     }
-//     //     accept after 1.5 [s] then Off;
-//     // }
+        state On {
+            entry set_led { in value = LedState::On; }
+        }
+        accept after 1.5 [s] then Off;
+    }
 }
