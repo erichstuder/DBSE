@@ -1,6 +1,6 @@
 // import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
+// import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,57 +13,16 @@ import java.io.IOException;
 import org.omg.sysml.interactive.SysMLInteractive;
 import org.omg.sysml.interactive.SysMLInteractiveResult;
 // import org.omg.sysml.interactive.VizResult;
-// import org.omg.sysml.lang.sysml.Element;
-import freemarker.template.Configuration;
-import freemarker.template.TemplateExceptionHandler;
-import freemarker.template.Template;
 
 public class CodeGenerator {
-    private SysMLInteractive sysml;
-
-    public class Enum {
-        private String name;
-        private HashMap<String, String> members;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public HashMap<String, String> getMembers() {
-            return members;
-        }
-
-        public void setMembers(HashMap<String, String> members) {
-            this.members = members;
-        }
-    }
+    private SysML sysml;
 
     public CodeGenerator() {
-        sysml = SysMLInteractive.getInstance();
-        sysml.loadLibrary("/SysML-v2-Pilot-Implementation/sysml.library/");
+        sysml = new SysML();
     }
 
     public void run(CodeGenConfig config) {
-        // Configuration cfg = new Configuration(Configuration.VERSION_2_3_34);
-        // try {
-        //     cfg.setDirectoryForTemplateLoading(new File(config.getProperty("template.path")));
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
-        // cfg.setDefaultEncoding("UTF-8");
-        // cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-        // cfg.setLogTemplateExceptions(false);
-        // cfg.setWrapUncheckedExceptions(true);
-        // cfg.setFallbackOnNullLoopVariable(false);
-        // // cfg.setSQLDateAndTimeTimeZone(TimeZone.getDefault()); // notwendig?
-        // vorangehende auch alle notwendig?
-
         // // simple data model
-
         // Map<String, Object> root = new HashMap<>();
         // List<Enum> enums = new ArrayList<>();
         // Enum enum1 = new Enum();
