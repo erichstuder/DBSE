@@ -9,5 +9,7 @@
 
     "python.analysis.extraPaths": [
         "../project_management"
-    ]
+    ],
+    "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+    "editor.formatOnPaste": false,
 }
