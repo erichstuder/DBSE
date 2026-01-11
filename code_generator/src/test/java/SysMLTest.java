@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.net.URISyntaxException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
-import java.util.Map;
 
 public class SysMLTest {
     private static final String MODEL_PATH = "../../resources/test/LedControl.sysml";
